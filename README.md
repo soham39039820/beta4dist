@@ -74,7 +74,7 @@ This will execute the tests and report any issues.
 
 ## Licensing
 
-**beta4dist** is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more details.
+**beta4dist** is licensed under the **MIT License**.
 
 ## References
 

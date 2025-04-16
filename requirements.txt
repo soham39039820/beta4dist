@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 numpy
 scipy
+=======
+numpy
+scipy
+>>>>>>> c118c7003366379a2a901ba1029f650417b1da62
