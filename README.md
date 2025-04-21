@@ -35,10 +35,10 @@ The four-parameter Beta distribution extends the standard Beta distribution by i
 
 To install **beta4dist**, you can use pip from PyPI:
 
-````bash
-pip install beta4dist`
+```bash
+pip install beta4dist
 
-Generate Samples from the Four-Parameter Beta Distribution
+### Generate Samples from the Four-Parameter Beta Distribution
 
 You can generate random samples from the four-parameter Beta distribution using the `r4beta` function:
 
