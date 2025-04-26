@@ -7,89 +7,84 @@ Created on Wed Apr 16 12:17:36 2025
 
 import numpy as np
 from scipy.stats import beta
-from scipy.special import digamma, loggamma
 from scipy.optimize import minimize
-from scipy.integrate import quad
-import statistics
+from scipy.special import digamma
 
-def LBE4beta(data):
+def LBE4beta(data, n_samples=10000):
     """
     Estimates the parameters of the four-parameter Beta distribution using 
-    marginal likelihood estimators based on order statistics, as described 
-    in the provided theorem.
+    marginal likelihood estimators based on order statistics and Monte Carlo integration.
 
     Parameters:
     data : array_like
         The observed data.
-
+    n_samples : int, optional
+        The number of samples to use for Monte Carlo integration (default is 10,000).
+    
     Returns:
-    tuple
-        A tuple containing the estimated parameters (theta1, theta2, alpha1, alpha2).
+    np.ndarray
+        Array containing the estimated parameters (theta1, theta2, alpha1, alpha2).
     """
 
-    # Estimate theta1 and theta2 using order statistics
+    # Estimate location parameters using order statistics
     data_sorted = np.sort(data)
     theta1_hat = data_sorted[0]
     theta2_hat = data_sorted[-1]
 
-    # Calculate z_hat values
+    # Normalize to [0,1] scale
     z_hat = (data_sorted[1:-1] - theta1_hat) / (theta2_hat - theta1_hat)
 
-    # Define the marginal likelihood equations for alpha1 and alpha2
+    def monte_carlo_integral(func, lower, upper, n_samples):
+        """
+        Perform Monte Carlo integration to estimate the integral of a function.
+        """
+        samples = np.random.uniform(lower, upper, n_samples)
+        return np.mean(func(samples))
+
     def neg_marginal_likelihood(params):
         alpha1, alpha2 = params
+        n = len(z_hat)
+        eps = 1e-8  # small threshold
 
-        n = len(data)
+        # Clip to avoid 0 or 1
+        z_hat_clipped = np.clip(z_hat, eps, 1 - eps)
+        z_min = np.min(z_hat_clipped)
+        z_max = np.max(z_hat_clipped)
 
-        # Calculate expectations using numerical integration (quadrature)
-        def integrand1(u):
-            return np.log(u) * beta.pdf(u, alpha1, alpha2) * (u > z_hat[-1])
+        # Define integrands safely
+        log_u = lambda u: np.log(np.clip(u, eps, 1)) * beta.pdf(u, alpha1, alpha2)
+        log_1mu = lambda u: np.log(np.clip(1 - u, eps, 1)) * beta.pdf(u, alpha1, alpha2)
 
-        def integrand2(u):
-            return np.log(u) * beta.pdf(u, alpha1, alpha2) * (u < z_hat[0])
+        # Perform Monte Carlo integration
+        E1 = monte_carlo_integral(log_u, z_max + eps, 1 - eps, n_samples)
+        E2 = monte_carlo_integral(log_u, eps, z_min - eps, n_samples)
+        E3 = monte_carlo_integral(log_1mu, z_max + eps, 1 - eps, n_samples)
+        E4 = monte_carlo_integral(log_1mu, eps, z_min - eps, n_samples)
 
-        def integrand3(u):
-            return np.log(1 - u) * beta.pdf(u, alpha1, alpha2) * (u > z_hat[-1])
-
-        def integrand4(u):
-            return np.log(1 - u) * beta.pdf(u, alpha1, alpha2) * (u < z_hat[0])
-
-        E1 = quad(integrand1, 0, 1, limit=100)[0]
-        E2 = quad(integrand2, 0, 1, limit=100)[0]
-        E3 = quad(integrand3, 0, 1, limit=100)[0]
-        E4 = quad(integrand4, 0, 1, limit=100)[0]
-
-        # Marginal likelihood equations from the theorem (negated for minimization)
         eq1 = -(n * (digamma(alpha1 + alpha2) - digamma(alpha1)) +
-               np.sum(np.log(z_hat)) +
-               E1 / (1 - beta.cdf(z_hat[-1], alpha1, alpha2)) +
-               E2 / beta.cdf(z_hat[0], alpha1, alpha2))
+                np.sum(np.log(z_hat_clipped)) +
+                E1 / (1 - beta.cdf(z_max, alpha1, alpha2) + eps) +
+                E2 / (beta.cdf(z_min, alpha1, alpha2) + eps))
 
         eq2 = -(n * (digamma(alpha1 + alpha2) - digamma(alpha2)) +
-               np.sum(np.log(1 - z_hat)) +
-               E3 / (1 - beta.cdf(z_hat[-1], alpha1, alpha2)) +
-               E4 / beta.cdf(z_hat[0], alpha1, alpha2))
+                np.sum(np.log(1 - z_hat_clipped)) +
+                E3 / (1 - beta.cdf(z_max, alpha1, alpha2) + eps) +
+                E4 / (beta.cdf(z_min, alpha1, alpha2) + eps))
 
-        # Combine the equations (e.g., sum of squares)
-        return eq1**2 + eq2**2 
+        return eq1**2 + eq2**2
 
-    # Solve the equations to find alpha1 and alpha2
-    # Use MoM estimates as initial values
-    mea = np.mean(z_hat)
-    var = statistics.variance(z_hat)
-    com_term = (mea * (1 - mea)) / var
-    guess_1 = (com_term - 1) * mea
-    guess_2 = (com_term - 1) * (1 - mea) 
-    
+    # Initial guess via method of moments
+    mean_z = np.mean(z_hat)
+    var_z = np.var(z_hat, ddof=1)
+    common_term = (mean_z * (1 - mean_z)) / var_z - 1
+    guess_1 = max(common_term * mean_z, 1e-3)
+    guess_2 = max(common_term * (1 - mean_z), 1e-3)
+
     bounds = [(1e-6, None), (1e-6, None)]
-    
-    guess_1 = max(abs(guess_1), 1e-3)  # Ensure guess_1 is positive and not too small
-    guess_2 = max(abs(guess_2), 1e-3)  # Ensure guess_2 is positive and not too small
-    
-    # Minimize the negative marginal likelihood with bounds
     result = minimize(neg_marginal_likelihood, [guess_1, guess_2], bounds=bounds, method='L-BFGS-B')
+
     alpha1_hat, alpha2_hat = result.x
-    
+
     return theta1_hat, theta2_hat, alpha1_hat, alpha2_hat
 
 def fit4beta(data):
