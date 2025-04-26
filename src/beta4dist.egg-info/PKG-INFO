@@ -13,94 +13,79 @@ Classifier: Operating System :: OS Independent
 Description-Content-Type: text/markdown
 License-File: LICENSE
 
-
 # beta4dist
 
-**beta4dist** is a Python package designed for working with the four-parameter beta distribution and implementing likelihood-based estimation methods for its parameters. The package provides functions for generating samples, fitting the four-parameter beta distribution, and performing likelihood-based estimation (LBE).
+**beta4dist** is a Python package designed for working with the four-parameter Beta distribution and implementing likelihood-based estimation methods for its parameters. It allows for sampling, parameter fitting, and likelihood-based estimation (LBE) using a flexible four-parameter formulation of the Beta distribution.
+
+## Table of Contents
+
+- [Description](#description)
+- [Features](#features)
+- [Installation](#installation)
+- [Examples](#examples)
+  - [Generate Samples](#generate-samples-from-the-four-parameter-beta-distribution)
+  - [Fit the Distribution](#fit-the-four-parameter-beta-distribution-using-likelihood-based-estimation)
+  - [Test Cases](#example-test-cases)
+- [Licensing](#licensing)
+- [References](#references)
 
 ## Description
 
-The goal of **beta4dist** is to provide an easy-to-use interface for:
+The goal of **beta4dist** is to provide an easy-to-use and efficient interface for working with the four-parameter Beta distribution. This package supports the following features:
 
-- Sampling from the four-parameter beta distribution.
-- Fitting the four-parameter beta distribution using likelihood-based estimation.
-- Implementing various estimation techniques for parameter inference.
+- **Sampling** from the four-parameter Beta distribution.
+- **Fitting** the distribution to data using likelihood-based estimation (LBE).
+- Implementing various **parameter inference techniques** for reliable statistical modeling.
 
-This package is useful for statistical modeling and simulation, especially in situations where data follow a beta distribution but with additional flexibility due to the four-parameter formulation.
+The four-parameter Beta distribution extends the standard Beta distribution by introducing location parameters, providing additional flexibility for modeling data confined to finite intervals with skewness and kurtosis. This makes it especially useful in fields like hydrology, environmental science, and reliability engineering.
+
+## Features
+
+- **Sampling**: Generate random samples from the four-parameter Beta distribution.
+- **Parameter Estimation**: Perform likelihood-based estimation for fitting the distribution to observed data.
+- **Robustness**: Ensure that parameter estimates obey the natural restrictions of the distribution.
+- **Flexible Usage**: Suitable for a wide range of applications, including statistical modeling and simulation.
 
 ## Installation
 
-To install **beta4dist**, you can use the following command:
+To install **beta4dist**, you can use pip from PyPI:
 
-```bash
-pip install beta4dist
-```
-
-Alternatively, you can clone the repository and install it locally:
-
-```bash
-git clone https://github.com/soham39039820/beta4dist.git
-cd beta4dist
-pip install .
-```
 
 ## Examples
 
 Here are some basic examples demonstrating how to use **beta4dist** for generating samples and performing likelihood-based estimation.
 
-### 1. **Generate Samples from the Four-Parameter Beta Distribution**
+### Generate Samples from the Four-Parameter Beta Distribution
 
-You can generate samples from the four-parameter beta distribution using the `r4beta` function:
+You can generate random samples from the four-parameter Beta distribution using the `r4beta` function:
 
-```python
-from beta4dist.distribution import r4beta
 
-# Generate 1000 samples from a 4-parameter beta distribution
-samples = r4beta(1000, 2, 3, 0.5, 0.5)
-print(samples[:10])  # Print the first 10 samples
-```
+### Fit the Four-Parameter Beta Distribution Using Likelihood-Based Estimation
 
-### 2. **Fit the Four-Parameter Beta Distribution Using Likelihood-Based Estimation**
+The `LBE4beta` function allows you to fit the four-parameter Beta distribution to your data using likelihood-based estimation:
 
-You can fit the distribution to your data using the `LBE4beta` function:
 
-```python
-from beta4dist.beta4_model import LBE4beta
+### Example Test Cases
 
-# Generate sample data
-import numpy as np
-samples = r4beta(1000, 2, 3, 0.5, 0.5)
+**beta4dist** includes pre-defined test cases to ensure that the model behaves as expected. You can run these tests using `pytest`:
 
-# Perform likelihood-based estimation
-params = LBE4beta(samples)
-
-print("Estimated Parameters:", params)
-```
-
-### 3. **Example Test Cases**
-
-The package also includes pre-defined tests to ensure that the model works as expected. You can run these tests using `pytest`:
-
-```bash
-pytest
-```
 
 This will execute the tests and report any issues.
 
 ## Licensing
 
-**beta4dist** is licensed under the **MIT License**.
+**beta4dist** is licensed under the **MIT License**. See the LICENSE file for more details.
 
 ## References
 
-For more information on the four-parameter beta distribution and its applications, please refer to the paper:
+For more information on the four-parameter Beta distribution and its applications, please refer to the following publication:
 
-- **Paper Title**: "SoftwareX: Efficient Statistical Modeling with the Four-Parameter Beta Distribution"
-- **Authors**: [Your Name], [Collaborators]
-- **DOI**: [DOI Link]
+- **Paper Title**: *beta4dist: A Python Package for the Four-Parameter Beta Distribution and Likelihood-Based Estimation*
+- **Authors**: Soham Ghosh, Sujay Mukhoti, Pritee Sharma
 
 ---
 
-For more information, bug reports, or feature requests, please open an issue or a pull request on the [GitHub repository](https://github.com/soham39039820/beta4dist).
+For additional information, bug reports, or feature requests, please visit the [GitHub repository](https://github.com/soham39039820/beta4dist) or open an issue or pull request.
+
 
 
