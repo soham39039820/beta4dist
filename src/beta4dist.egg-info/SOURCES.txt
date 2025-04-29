@@ -1,6 +1,7 @@
 LICENSE
 MANIFEST.in
 README.md
+pyproject.toml
 setup.py
 src/beta4dist/__init__.py
 src/beta4dist/beta4_model.py
@@ -10,3 +11,5 @@ src/beta4dist.egg-info/SOURCES.txt
 src/beta4dist.egg-info/dependency_links.txt
 src/beta4dist.egg-info/requires.txt
 src/beta4dist.egg-info/top_level.txt
+tests/test_beta4_model.py
+tests/test_distribution.py

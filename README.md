@@ -35,9 +35,43 @@ The four-parameter Beta distribution extends the standard Beta distribution by i
 
 To install **beta4dist**, you can use pip from PyPI:
 
+### To install the package for the first time:
 ```bash
 pip install beta4dist
 ```
+
+### To upgrade to the latest version:
+```bash
+pip install --upgrade beta4dist
+```
+
+### 2. Clone the repository from GitHub:
+If you prefer to work with the latest code or contribute, you can clone the repository directly from GitHub:
+
+```bash
+git clone https://github.com/soham39039820/beta4dist.git
+```
+
+After cloning, navigate to the project directory and install it:
+
+```bash
+cd beta4dist
+pip install .
+```
+
+## Running Tests
+
+To ensure everything is working correctly, you can run the tests using `pytest`:
+
+1. Clone the repository or install the package.
+
+2. Install the necessary dependencies (if not already done).
+
+3. Run the tests:
+```bash
+pytest
+```
+
 ### Generate Samples from the Four-Parameter Beta Distribution
 
 You can generate random samples from the four-parameter Beta distribution using the `r4beta` function:

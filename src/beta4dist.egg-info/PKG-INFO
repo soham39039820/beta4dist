@@ -1,17 +1,35 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.4
 Name: beta4dist
-Version: 0.1.0
+Version: 0.2.0
 Summary: A Python package for the Four-Parameter Beta Distribution and Likelihood-Based Estimation
 Home-page: https://github.com/soham39039820/beta4dist
 Author: Soham Ghosh
 Author-email: phd2001161004@iiti.ac.in
 License: MIT
-Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Mathematics
+Requires-Python: >=3.7
 Description-Content-Type: text/markdown
 License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: scipy
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
 
 # beta4dist
 
@@ -50,42 +68,101 @@ The four-parameter Beta distribution extends the standard Beta distribution by i
 
 To install **beta4dist**, you can use pip from PyPI:
 
+### To install the package for the first time:
+```bash
+pip install beta4dist
+```
 
-## Examples
+### To upgrade to the latest version:
+```bash
+pip install --upgrade beta4dist
+```
 
-Here are some basic examples demonstrating how to use **beta4dist** for generating samples and performing likelihood-based estimation.
+### 2. Clone the repository from GitHub:
+If you prefer to work with the latest code or contribute, you can clone the repository directly from GitHub:
+
+```bash
+git clone https://github.com/soham39039820/beta4dist.git
+```
+
+After cloning, navigate to the project directory and install it:
+
+```bash
+cd beta4dist
+pip install .
+```
+
+## Running Tests
+
+To ensure everything is working correctly, you can run the tests using `pytest`:
+
+1. Clone the repository or install the package.
+
+2. Install the necessary dependencies (if not already done).
+
+3. Run the tests:
+```bash
+pytest
+```
 
 ### Generate Samples from the Four-Parameter Beta Distribution
 
 You can generate random samples from the four-parameter Beta distribution using the `r4beta` function:
 
+```python
+import beta4dist
+from beta4dist.distribution import r4beta
 
+# Define parameters
+theta1, theta2 = 0, 1
+alpha1, alpha2 = 2.5, 3.0
+
+# Generate 100 samples
+samples = r4beta(n=100, theta1=theta1, theta2=theta2, alpha1=alpha1, alpha2=alpha2)
+
+print(samples)
+```
 ### Fit the Four-Parameter Beta Distribution Using Likelihood-Based Estimation
 
-The `LBE4beta` function allows you to fit the four-parameter Beta distribution to your data using likelihood-based estimation:
+The `LBE4beta` function allows you to obtain the likelihood-based estimators of the four-parameter Beta distribution to your data. The `fit4beta` offers an end-to-end interface to fit the distribution to real data, with automatic handling of boundary estimation, internal consistency checks, and feasibility diagnostics.
 
+```python
+from beta4dist.beta4_model import LBE4beta, fit4beta
 
+estimates = LBE4beta(data)
+print("Estimated Parameters:", estimates)
+
+# Fit and display model diagnostics
+fit_results = fit4beta(data)
+print("Model Fit Summary:", fit_results)
+```
 ### Example Test Cases
+beta4dist includes pre-defined test cases to ensure that the model behaves as expected. You can run these tests using pytest.
 
-**beta4dist** includes pre-defined test cases to ensure that the model behaves as expected. You can run these tests using `pytest`:
+Install `pytest` if you haven't already:
 
+```bash
+pip install pytest
+```
+Run test using:
 
-This will execute the tests and report any issues.
+```bash
+pytest
+```
+Windows users — if `pytest` is not recognized, try:
 
-## Licensing
+```bash
+"C:\Users\soham\AppData\Roaming\Python\Python310\Scripts\pytest.exe"
+```
 
-**beta4dist** is licensed under the **MIT License**. See the LICENSE file for more details.
+### Licensing
 
-## References
+`beta4dist` is licensed under the MIT License. See the LICENSE file for more details.
+
+### References
 
 For more information on the four-parameter Beta distribution and its applications, please refer to the following publication:
 
 - **Paper Title**: *beta4dist: A Python Package for the Four-Parameter Beta Distribution and Likelihood-Based Estimation*
 - **Authors**: Soham Ghosh, Sujay Mukhoti, Pritee Sharma
-
----
-
-For additional information, bug reports, or feature requests, please visit the [GitHub repository](https://github.com/soham39039820/beta4dist) or open an issue or pull request.
-
-
 

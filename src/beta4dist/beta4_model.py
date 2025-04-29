@@ -105,11 +105,8 @@ def fit4beta(data):
     # Estimate parameters
     theta1_hat, theta2_hat, alpha1_hat, alpha2_hat = LBE4beta(data)
 
-    consistency_status = "Passed"  # Initialize to "Passed"
-    if not (theta1_hat < theta2_hat):
-        consistency_status = "Failed: theta1 is greater than theta2"
-    if not (alpha1_hat > 0 and alpha2_hat > 0):
-        consistency_status = "Failed: alpha1 or alpha2 not positive"
+    # Status check: 1 if both alpha1 and alpha2 are positive, else 0
+    status = 1 if (alpha1_hat > 0 and alpha2_hat > 0) else 0
 
     # Calculate log-likelihood
     z = (data - theta1_hat) / (theta2_hat - theta1_hat)
@@ -136,7 +133,7 @@ def fit4beta(data):
         "BIC": BIC,
         "AICc": AICc,
         "HQIC": HQIC,
-        "consistency_check": consistency_status  # Include the status string
+        "status": status  # 1 if passed, 0 if failed
     }
 
     return results

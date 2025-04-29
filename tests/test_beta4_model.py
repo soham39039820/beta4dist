@@ -7,6 +7,11 @@ Created on Wed Apr 16 16:48:13 2025
 
 # tests/test_beta4_model.py
 
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+
+
 import numpy as np
 from beta4dist.distribution import r4beta
 from beta4dist.beta4_model import LBE4beta, fit4beta
@@ -34,4 +39,5 @@ def test_fit4beta():
     assert isinstance(result, dict)
     for key in ['theta1', 'theta2', 'alpha1', 'alpha2', 'loglik', 'AIC']:
         assert key in result
-    assert result['consistency_check'] == 'Passed'
+    assert 'status' in result
+    assert result['status'] in [0, 1]

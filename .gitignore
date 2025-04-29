@@ -1,5 +1,25 @@
-# Ignore build directory
-build/
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*$py.class
 
-# Ignore pytest cache directory
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Pytest
 .pytest_cache/
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# IDEs/editors
+.vscode/
+.idea/
+
+# OS-specific
+.DS_Store
+Thumbs.db
