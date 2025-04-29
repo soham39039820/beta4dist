@@ -59,19 +59,6 @@ cd beta4dist
 pip install .
 ```
 
-## Running Tests
-
-To ensure everything is working correctly, you can run the tests using `pytest`:
-
-1. Clone the repository or install the package.
-
-2. Install the necessary dependencies (if not already done).
-
-3. Run the tests:
-```bash
-pytest
-```
-
 ### Generate Samples from the Four-Parameter Beta Distribution
 
 You can generate random samples from the four-parameter Beta distribution using the `r4beta` function:
