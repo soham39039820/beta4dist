@@ -124,7 +124,7 @@ Windows users — if `pytest` is not recognized, try:
 ```
 
 ### Version
-The current version of `beta4dist` is 0.3.1.
+The current version of `beta4dist` is 0.2.1.
 
 To check the version in Python, use the following code:
 ```python
