@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: beta4dist
-Version: 0.3.1
+Version: 0.3.2
 Summary: A Python package for the Four-Parameter Beta Distribution and Likelihood-Based Estimation
 Home-page: https://github.com/soham39039820/beta4dist
 Author: Soham Ghosh
@@ -147,7 +147,7 @@ Windows users — if `pytest` is not recognized, try:
 ```
 
 ### Version
-The current version of `beta4dist` is 0.3.1.
+The current version of `beta4dist` is 0.3.2.
 
 To check the version in Python, use the following code:
 ```python
