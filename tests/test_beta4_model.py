@@ -45,10 +45,3 @@ def test_fit4beta():
     
     assert 'status' in result
     assert result['status'] in [0, 1]
-
-    # Check statistical test outputs
-    assert 'ks_pvalue' in result
-    assert 'cvm_pvalue' in result
-    assert 0.0 <= result['ks_pvalue'] <= 1.0
-    assert 0.0 <= result['cvm_pvalue'] <= 1.0
-

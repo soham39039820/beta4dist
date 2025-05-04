@@ -123,13 +123,6 @@ def fit4beta(data):
     AICc = AIC + (2 * k * (k + 1)) / (n - k - 1)
     HQIC = -2 * loglik + 2 * k * np.log(np.log(n))
     
-    # KS test (against fitted beta distribution)
-    ks_stat, ks_pval = kstest(z, 'beta', args=(alpha1_hat, alpha2_hat))
-
-    # Cramér-von Mises test
-    cvm_result = cramervonmises(z, beta(alpha1_hat, alpha2_hat).cdf)
-    cvm_stat, cvm_pval = cvm_result.statistic, cvm_result.pvalue
-
     # Store results
     results = {
         "theta1": theta1_hat,
@@ -142,10 +135,6 @@ def fit4beta(data):
         "AICc": AICc,
         "HQIC": HQIC,
         "status": status,  # 1 if passed, 0 if failed
-        "KS_pvalue": ks_pval,
-        "KS_statistic": ks_stat,
-        "CvM_pvalue": cvm_pval,
-        "CvM_statistic": cvm_stat
     }
 
     return results
