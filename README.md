@@ -1,5 +1,8 @@
 # beta4dist
 
+[![PyPI version](https://badge.fury.io/py/beta4dist.svg)](https://badge.fury.io/py/beta4dist)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 **beta4dist** is a Python package designed for working with the four-parameter Beta distribution and implementing likelihood-based estimation methods for its parameters. It allows for sampling, parameter fitting, and likelihood-based estimation (LBE) using a flexible four-parameter formulation of the Beta distribution.
 
 ## Table of Contents
@@ -24,12 +27,23 @@ The goal of **beta4dist** is to provide an easy-to-use and efficient interface f
 
 The four-parameter Beta distribution extends the standard Beta distribution by introducing location parameters, providing additional flexibility for modeling data confined to finite intervals with skewness and kurtosis. This makes it especially useful in fields like hydrology, environmental science, and reliability engineering.
 
+---
 ## Features
 
-- **Sampling**: Generate random samples from the four-parameter Beta distribution.
-- **Parameter Estimation**: Perform likelihood-based estimation for fitting the distribution to observed data.
-- **Robustness**: Ensure that parameter estimates obey the natural restrictions of the distribution.
-- **Flexible Usage**: Suitable for a wide range of applications, including statistical modeling and simulation.
+- **Sampling** from the four-parameter Beta distribution  
+- **Parameter estimation** using likelihood-based methods  
+- **Diagnostic summaries** for goodness-of-fit  
+- **Fully tested** with Pytest  
+- **Applicable in real-world settings** involving environmental and reliability data
+
+---
+
+## Requirements
+
+- Python ≥ 3.7  
+- numpy  
+- scipy
+---
 
 ## Installation
 
@@ -109,6 +123,15 @@ Windows users — if `pytest` is not recognized, try:
 "C:\Users\soham\AppData\Roaming\Python\Python310\Scripts\pytest.exe"
 ```
 
+### Version
+The current version of `beta4dist` is 0.3.1.
+
+To check the version in Python, use the following code:
+```python
+import beta4dist
+print(beta4dist.__version__)
+```
+
 ### Licensing
 
 `beta4dist` is licensed under the MIT License. See the LICENSE file for more details.
@@ -118,5 +141,5 @@ Windows users — if `pytest` is not recognized, try:
 For more information on the four-parameter Beta distribution and its applications, please refer to the following publication:
 
 - **Paper Title**: *beta4dist: A Python Package for the Four-Parameter Beta Distribution and Likelihood-Based Estimation*
-- **Authors**: Soham Ghosh, Sujay Mukhoti, Pritee Sharma
+- **Authors**: Soham Ghosh, Sujay Mukhoti, Abhirup Banerjee
 

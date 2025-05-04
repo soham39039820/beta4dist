@@ -1,11 +1,12 @@
-Metadata-Version: 2.4
+Metadata-Version: 2.1
 Name: beta4dist
-Version: 0.2.0
+Version: 0.2.1
 Summary: A Python package for the Four-Parameter Beta Distribution and Likelihood-Based Estimation
 Home-page: https://github.com/soham39039820/beta4dist
 Author: Soham Ghosh
 Author-email: phd2001161004@iiti.ac.in
 License: MIT
+Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
@@ -13,23 +14,8 @@ Classifier: Intended Audience :: Science/Research
 Classifier: Topic :: Scientific/Engineering :: Mathematics
 Requires-Python: >=3.7
 Description-Content-Type: text/markdown
-License-File: LICENSE
-Requires-Dist: numpy
-Requires-Dist: scipy
 Provides-Extra: dev
-Requires-Dist: pytest; extra == "dev"
-Dynamic: author
-Dynamic: author-email
-Dynamic: classifier
-Dynamic: description
-Dynamic: description-content-type
-Dynamic: home-page
-Dynamic: license
-Dynamic: license-file
-Dynamic: provides-extra
-Dynamic: requires-dist
-Dynamic: requires-python
-Dynamic: summary
+License-File: LICENSE
 
 # beta4dist
 
@@ -92,19 +78,6 @@ cd beta4dist
 pip install .
 ```
 
-## Running Tests
-
-To ensure everything is working correctly, you can run the tests using `pytest`:
-
-1. Clone the repository or install the package.
-
-2. Install the necessary dependencies (if not already done).
-
-3. Run the tests:
-```bash
-pytest
-```
-
 ### Generate Samples from the Four-Parameter Beta Distribution
 
 You can generate random samples from the four-parameter Beta distribution using the `r4beta` function:
@@ -165,4 +138,6 @@ For more information on the four-parameter Beta distribution and its application
 
 - **Paper Title**: *beta4dist: A Python Package for the Four-Parameter Beta Distribution and Likelihood-Based Estimation*
 - **Authors**: Soham Ghosh, Sujay Mukhoti, Pritee Sharma
+
+
 

@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='beta4dist',
-    version='0.2.1',
+    version='0.3.1',
     package_dir={'': 'src'},
     packages=find_packages(where='src'),
     description='A Python package for the Four-Parameter Beta Distribution and Likelihood-Based Estimation',
@@ -26,5 +26,11 @@ setup(
     ],
     extras_require={
         'dev': ['pytest']
+    },
+    keywords='beta distribution, four-parameter beta, likelihood estimation, statistics, probability, hydrology',
+    project_urls={
+        'Documentation': 'https://github.com/soham39039820/beta4dist#readme',
+        'Source': 'https://github.com/soham39039820/beta4dist',
+        'Tracker': 'https://github.com/soham39039820/beta4dist/issues',
     },
 )
