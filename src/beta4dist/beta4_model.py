@@ -26,6 +26,11 @@ def LBE4beta(data, n_samples=10000):
     np.ndarray
         Array containing the estimated parameters (theta1, theta2, alpha1, alpha2).
     """
+    
+    # Check for zero variance
+    if np.var(data) == 0:
+        print("Error: The input data has zero variance. Estimation is not possible.")
+        return np.array([np.nan, np.nan, np.nan, np.nan])
 
     # Estimate location parameters using order statistics
     data_sorted = np.sort(data)
@@ -102,6 +107,10 @@ def fit4beta(data):
         A dictionary containing the estimated parameters, model selection criteria,
         and consistency check results.
     """
+    # Check for zero variance
+    if np.var(data) == 0:
+        print("Error: The input data has zero variance. Estimation is not possible.")
+        return np.array([np.nan, np.nan, np.nan, np.nan])
 
     # Estimate parameters
     theta1_hat, theta2_hat, alpha1_hat, alpha2_hat = LBE4beta(data)
