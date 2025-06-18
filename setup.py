@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='beta4dist',
-    version='0.3.2',
+    version='0.3.3',
     package_dir={'': 'src'},
     packages=find_packages(where='src'),
     description='A Python package for the Four-Parameter Beta Distribution and Likelihood-Based Estimation',
